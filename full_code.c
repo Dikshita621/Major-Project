@@ -6,18 +6,21 @@
  * Structure definition for each element of the Periodic Table.
  * Stores atomic number, name, symbol, and electron configuration.
  */
-typedef struct {
+typedef struct
+{
     int atomicNumber;
     char name[20];
     char symbol[3];
     char electronConfig[50];
-} Element;
+}
+Element;
 
 // Array holding details of all 118 elements in the periodic table.
 
     // Populate with tuples: {atomic number, name, symbol, electron configuration}
     
-Element periodicTable[118] = {
+Element periodicTable[118] =
+{
     {1, "Hydrogen", "H", "1s1"},
     {2, "Helium", "He", "1s2"},
     {3, "Lithium", "Li", "[He] 2s1"},
@@ -142,7 +145,8 @@ Element periodicTable[118] = {
 /* 
  * Prints the details of an element, nicely formatted.
  */
-void printElementInfo(Element e) {
+void printElementInfo(Element e) 
+{
     printf("\n------------------------------\n");
     printf("Element Name     : %s\n", e.name);
     printf("Symbol           : %s\n", e.symbol);
@@ -155,9 +159,12 @@ void printElementInfo(Element e) {
  * Search for an element by its atomic number.
  * Returns 1 if found, 0 if not found.
  */
-int searchByAtomicNumber(int number) {
-    for (int i = 0; i < 118; i++) {
-        if (periodicTable[i].atomicNumber == number) {
+int searchByAtomicNumber(int number)
+{
+    for (int i = 0; i < 118; i++) 
+    {
+        if (periodicTable[i].atomicNumber == number) 
+        {
             printElementInfo(periodicTable[i]);
             return 1;
         }
@@ -170,8 +177,10 @@ int searchByAtomicNumber(int number) {
  * Case-insensitive comparison of two strings.
  * Returns 0 if same, non-zero if different.
  */
-int strCaseCmp(const char *s1, const char *s2) {
-    while (*s1 && *s2) {
+int strCaseCmp(const char *s1, const char *s2) 
+{
+    while (*s1 && *s2)
+        {
         if (tolower(*s1) != tolower(*s2))
             return tolower(*s1) - tolower(*s2);
         s1++;
@@ -185,9 +194,11 @@ int strCaseCmp(const char *s1, const char *s2) {
  * Search for an element by its name or symbol.
  * Returns 1 if found, 0 if not found.
  */
-int searchByNameOrSymbol(char input[]) {
+int searchByNameOrSymbol(char input[])
+{
     for (int i = 0; i < 118; i++) {
-        if (strCaseCmp(input, periodicTable[i].name) == 0 || strCaseCmp(input, periodicTable[i].symbol) == 0) {
+        if (strCaseCmp(input, periodicTable[i].name) == 0 || strCaseCmp(input, periodicTable[i].symbol) == 0)
+        {
             printElementInfo(periodicTable[i]);
             return 1;
         }
@@ -200,7 +211,8 @@ int searchByNameOrSymbol(char input[]) {
  * List all elements in the periodic table.
  * Displays atomic number, symbol, and name.
  */
-void listAllElements() {
+void listAllElements()
+{
     printf("\nList of Elements (Atomic Number : Symbol - Name):\n");
     for (int i = 0; i < 118; i++) {
         printf("%3d : %3s - %s\n", periodicTable[i].atomicNumber, periodicTable[i].symbol, periodicTable[i].name);
@@ -211,12 +223,15 @@ void listAllElements() {
  * Main entry point of the program.
  * Displays menu, takes user input, and calls requested features.
  */
-int main() {
+int main()
+
+{
     int choice;
     printf("Welcome to the Modern Periodic Table!\n");
 
     // Main interactive loop
-    while (1) {
+    while (1)
+        {
         printf("\n=============================\n");
         printf("     Modern Periodic Table    \n");
         printf("=============================\n");
@@ -228,7 +243,8 @@ int main() {
         scanf("%d", &choice);
         getchar(); // Consume leftover newline
 
-        if (choice == 1) {
+        if (choice == 1)
+        {
             int num;
             printf("Enter atomic number (1-118): ");
             scanf("%d", &num);
@@ -238,7 +254,8 @@ int main() {
             if (!searchByAtomicNumber(num)) {
                 printf("No element found with atomic number %d\n", num);
             }
-        } else if (choice == 2) {
+        } else if (choice == 2)
+        {
             char input[50];
             printf("Enter element name or symbol: ");
             fgets(input, sizeof(input), stdin);
@@ -248,17 +265,23 @@ int main() {
             if (!searchByNameOrSymbol(input)) {
                 printf("No element found with name or symbol '%s'\n", input);
             }
-        } else if (choice == 3) {
+        } 
+        else if (choice == 3)
+        {
             listAllElements(); // Display the full table
-        } else if (choice == 4) {
+        }
+        else if (choice == 4)
+        {
             printf("Thank you for using the Modern Periodic Table. Goodbye!\n");
             break;
-        } else {
+        }
+        else
+        {
             // Handle invalid choices
             printf("Invalid choice. Please enter 1 to 4.\n");
         }
     }
 
-    return 0; // Successful program termination
+    return 0;          // Successful program termination
 }
 
