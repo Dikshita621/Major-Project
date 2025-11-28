@@ -8,10 +8,10 @@
  */
 typedef struct
 {
-    int atomicNumber;
-    char name[20];
-    char symbol[3];
-    char electronConfig[50];
+    int Atomic_Number;
+    char Name[20];
+    char Symbol[3];
+    char Electron_Config[50];
 }
 Element;
 
@@ -19,7 +19,7 @@ Element;
 
     // Populate with tuples: {atomic number, name, symbol, electron configuration}
     
-Element periodicTable[118] =
+Element PeriodicTable[118] =
 {
     {1, "Hydrogen", "H", "1s1"},
     {2, "Helium", "He", "1s2"},
@@ -145,13 +145,13 @@ Element periodicTable[118] =
 /* 
  * Prints the details of an element, nicely formatted.
  */
-void printElementInfo(Element e) 
+void printElementInfo(Element E) 
 {
     printf("\n------------------------------\n");
-    printf("Element Name     : %s\n", e.name);
-    printf("Symbol           : %s\n", e.symbol);
-    printf("Atomic Number    : %d\n", e.atomicNumber);
-    printf("Electron Config. : %s\n", e.electronConfig);
+    printf("Element Name     : %s\n", E.Name);
+    printf("Symbol           : %s\n", E.Symbol);
+    printf("Atomic Number    : %d\n", E.Atomic_Number);
+    printf("Electron Config. : %s\n", E.Electron_Config);
     printf("------------------------------\n");
 }
 
