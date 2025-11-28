@@ -1,0 +1,171 @@
+# Modern Periodic Table Console Application
+
+BTech CSE, UPES Dehradun  
+Submitted by:  
+Dikshita Choudhary
+SAP ID :590026654  
+Course: C Programming   
+Date: November 29, 2025  
+
+***
+
+## Abstract
+
+This project’s all about building a simple console app in C that gives you the full modern periodic table.The program packs in data for all 118 elements—atomic numbers, names, symbols, electron configurations—you name it.You can search for elements by atomic number, name, or symbol, and it doesn’t matter how you type it in. Want to see the whole table? That’s there too. The app uses structures and arrays, and it shows off file handling, string tricks, modular programming, and menus that make sense. It’s perfect for learning or quick reference.All the main features work smoothly, with input checks and clean, readable output.
+
+***
+
+## Problem Definition
+
+If you’ve studied chemistry, you know the pain—sometimes you just need quick look at the periodic table, but dragging around a giant chart or trying to find a stable internet connection is a hassle. This project fixes that.It’s a lightweight, offline console program that lets you look up any element or scroll through the whole table, right from your computer.
+
+Input:  
+Pick an option from the menu (1-4), then enter either a name, symbol, or atomic number (1-118).
+
+Output:  
+You get detailed info for the element—name, symbol, atomic number, electron configuration—or you see the entire periodic table. If you mess up the input, it tells you. Just keep in mind: it’s fixed at 118 elements, runs in the console, and doesn’t use any file I/O.***
+
+## System Design
+
+### Algorithm / Pseudocode
+
+MAIN PROGRAM:
+1. Load up an array with all 118 elements.2. Show a welcome menu.
+3. While the user wants to keep going:
+   a. Display the options (1: Search by atomic number, 2: Search by name or symbol, 3: List all, 4: Exit)
+   b. Get the user’s choice.c. If they pick 1, search by atomic number.
+   d. If they pick 2, search by name or symbol (case-insensitive).
+   e. If they pick 3, show all elements.
+   f. If they pick 4, exit the program nicely.
+   g. Anything else—let them know it’s not a valid option.SEARCH BY ATOMIC NUMBER:
+- Loop through each element. If the atomic number matches, show the details and you’re done. If not, say it wasn’t found.
+
+SEARCH BY NAME/SYMBOL:
+- Go through each element and check if the name or symbol matches (doesn’t matter how you type it). If it does, show the details. If not, say it wasn’t found.
+
+DISPLAY ELEMENT:
+- Print the name, symbol, atomic number, and electron configuration in a neat block.### Data Flow
+
+User Input → Menu Handler → Search Functions → periodicTable Array → Formatted Output  
+                     ↓  
+                 Error Messages ← Validation Checks
+
+### Key Data Structure
+
+typedef struct {
+    int atomicNumber;
+    char name[20];
+    char symbol[3];
+    char electronConfig[50];
+} Element;
+
+***
+
+## Implementation Details
+
+### Main Components
+
+1. **Global Data Structure**: There’s a hardcoded array called periodicTable[118] that holds all the element info for reliability.
+
+2.**Core Functions**:
+   - printElementInfo(Element e): Neatly prints the details for a single element.
+   - searchByAtomicNumber(int number): Checks the array for the right atomic number.
+   - strCaseCmp(const char *s1, const char *s2): Custom function to compare strings, ignoring case.
+   - searchByNameOrSymbol(char input[]): Looks for a match in either the name or symbol.
+   - listAllElements(): Runs through all 118 elements and lists them.3. **Key Code Snippet – Case-Insensitive Search**:
+
+int strCaseCmp(const char *s1, const char *s2) {
+    while (*s1 && *s2) {
+        if (tolower(*s1) != tolower(*s2))
+            return tolower(*s1) - tolower(*s2);
+        s1++; s2++;
+    }
+    return tolower(*s1) - tolower(*s2);
+}
+
+4. **Input Handling**: For numbers, “scanf()” does the job. For strings, it uses “fgets()” and strips out the newline with “strcspn()” so you don’t get weird input bugs.
+
+5. **Modular Design**: Every big task is its own function, so the code stays tidy and easy to follow.***
+
+## Testing and Results
+
+### Test Cases
+
+| Test ID | Description                | Input                         | Expected Output                     | Status |
+|---------|----------------------------|-------------------------------|-------------------------------------|--------|
+| TC-01   | Valid atomic number search | Choice:1, Atomic#: 6          | Carbon details displayed            | PASS   |
+| TC-02   | Invalid atomic number      | Choice:1, Atomic#: 999        | "No element found..." message       | PASS   |
+| TC-03   | Name search (exact case)   | Choice:2, "Hydrogen"          | Hydrogen details                    | PASS   |
+| TC-04   | Name search (wrong case)   | Choice:2, "hydrogen"          | Hydrogen details (case-insensitive) | PASS   |
+| TC-05   | Symbol search              | Choice:2, "Fe"                | Iron details                       | PASS   |
+| TC-06   | Full table listing         | Choice:3                      | 118 elements listed                 | PASS   |
+| TC-07   | Invalid menu choice        | Choice:5                      | "Invalid choice..." message         | PASS   |
+
+### Sample Console Output
+
+Test Case TC-01 (Carbon Search):
+
+Enter atomic number (1-118): 6
+
+------------------------------
+Element Name     : Carbon
+Symbol           : C
+Atomic Number    : 6
+Electron Config  : [He] 2s2 2p2
+------------------------------
+
+Sample Console Output
+
+Test Case TC-01 (Carbon Search):
+Enter atomic number (1-118): 6
+
+------------------------------
+Element Name     : Carbon
+Symbol           : C
+Atomic Number    : 6
+Electron Config. : [He] 2s2 2p2
+------------------------------
+
+Test Case TC-04 (Case Insensitive):
+Enter element name or symbol: HYDROGEN
+
+------------------------------
+Element Name     : Hydrogen
+Symbol           : H
+Atomic Number    : 1
+Electron Config.: 1s1
+------------------------------
+
+All tests ran smoothly on the GCC compiler (Ubuntu Linux). No surprises—everything just worked.***
+
+Conclusion and Future Work
+
+This project nailed what it set out to do: a working, easy-to-use periodic table app that puts solid C programming skills on display.It covers the basics like structures, arrays, handling strings, breaking things into functions, and interactive input/output. The case-insensitive search helps a lot, and the menu is simple enough that anyone can use it for quick chemistry lookups.What went well:
+- All 118 elements included
+- Search works great, no errors
+- The console interface looks greate
+- Errors are handled carefully
+
+What’s next?
+- Show more details, like atomic mass, group, period, and state at room temperature
+- Let users load their own element databases from files
+- Add sorting and filtering by group, period, or other properties
+- Build a nicer interface using the ncurses library
+- Add an option to export search results to a text file
+
+***
+
+References
+
+1. K&R C Programming Language (2nd Edition) - Dennis Ritchie, Brian Kernighan
+2. Periodic Table data from IUPAC official specifications
+3. GCC Compiler Documentation - GNU Project
+4. Standard C Library Reference - stdio.h, string.h, ctype.h
+
+***
+
+Appendix - Complete Source Code
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
