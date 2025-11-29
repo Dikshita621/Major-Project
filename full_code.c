@@ -163,9 +163,9 @@ int searchByAtomicNumber(int number)
 {
     for (int i = 0; i < 118; i++) 
     {
-        if (periodicTable[i].atomicNumber == number) 
+        if (PeriodicTable[i].Atomic_Number == number) 
         {
-            printElementInfo(periodicTable[i]);
+            printElementInfo(PeriodicTable[i]);
             return 1;
         }
     }
@@ -197,9 +197,9 @@ int strCaseCmp(const char *s1, const char *s2)
 int searchByNameOrSymbol(char input[])
 {
     for (int i = 0; i < 118; i++) {
-        if (strCaseCmp(input, periodicTable[i].name) == 0 || strCaseCmp(input, periodicTable[i].symbol) == 0)
+        if (strCaseCmp(input, PeriodicTable[i].Name) == 0 || strCaseCmp(input, PeriodicTable[i].Symbol) == 0)
         {
-            printElementInfo(periodicTable[i]);
+            printElementInfo(PeriodicTable[i]);
             return 1;
         }
     }
@@ -215,7 +215,7 @@ void listAllElements()
 {
     printf("\nList of Elements (Atomic Number : Symbol - Name):\n");
     for (int i = 0; i < 118; i++) {
-        printf("%3d : %3s - %s\n", periodicTable[i].atomicNumber, periodicTable[i].symbol, periodicTable[i].name);
+        printf("%3d : %3s - %s\n", PeriodicTable[i].Atomic_Number, PeriodicTable[i].Symbol, PeriodicTable[i].Name);
     }
 }
 
@@ -284,4 +284,6 @@ int main()
 
     return 0;          // Successful program termination
 }
+
+
 
