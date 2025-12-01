@@ -7,13 +7,12 @@ SAP ID :590026654
 Course: C Programming   
 Date: November 29, 2025  
 
-***
 
 ## Abstract
 
 This project’s all about building a simple console app in C that gives you the full modern periodic table.The program packs in data for all 118 elements—atomic numbers, names, symbols, electron configurations—you name it.You can search for elements by atomic number, name, or symbol, and it doesn’t matter how you type it in. Want to see the whole table? That’s there too. The app uses structures and arrays, and it shows off file handling, string tricks, modular programming, and menus that make sense. It’s perfect for learning or quick reference.All the main features work smoothly, with input checks and clean, readable output.
 
-***
+
 
 ## Problem Definition
 
@@ -23,7 +22,7 @@ Input:
 Pick an option from the menu (1-4), then enter either a name, symbol, or atomic number (1-118).
 
 Output:  
-You get detailed info for the element—name, symbol, atomic number, electron configuration—or you see the entire periodic table. If you mess up the input, it tells you. Just keep in mind: it’s fixed at 118 elements, runs in the console, and doesn’t use any file I/O.***
+You get detailed info for the element—name, symbol, atomic number, electron configuration—or you see the entire periodic table. If you mess up the input, it tells you. Just keep in mind: it’s fixed at 118 elements, runs in the console, and doesn’t use any file I/O.
 
 ## System Design
 
@@ -46,33 +45,33 @@ SEARCH BY NAME/SYMBOL:
 DISPLAY ELEMENT:
 - Print the name, symbol, atomic number, and electron configuration in a neat block.### Data Flow
 
-User Input → Menu Handler → Search Functions → periodicTable Array → Formatted Output  
+User Input → Menu Handler → Search Functions → PeriodicTable Array → Formatted Output  
                      ↓  
                  Error Messages ← Validation Checks
 
 ### Key Data Structure
 
 typedef struct {
-    int atomicNumber;
-    char name[20];
-    char symbol[3];
-    char electronConfig[50];
+    int Atomic_Number;
+    char Name[20];
+    char Symbol[3];
+    char Electron_Config[50];
 } Element;
 
-***
+
 
 ## Implementation Details
 
 ### Main Components
 
-1. **Global Data Structure**: There’s a hardcoded array called periodicTable[118] that holds all the element info for reliability.
+1.  Global Data Structure : There’s a hardcoded array called PeriodicTable[118] that holds all the element info for reliability.
 
-2.**Core Functions**:
-   - printElementInfo(Element e): Neatly prints the details for a single element.
+2. Core Functions :
+   - printElementInfo(Element E): Neatly prints the details for a single element.
    - searchByAtomicNumber(int number): Checks the array for the right atomic number.
    - strCaseCmp(const char *s1, const char *s2): Custom function to compare strings, ignoring case.
    - searchByNameOrSymbol(char input[]): Looks for a match in either the name or symbol.
-   - listAllElements(): Runs through all 118 elements and lists them.3. **Key Code Snippet – Case-Insensitive Search**:
+   - listAllElements(): Runs through all 118 elements and lists them.3. **Key Code Snippet – Case-Insensitive Search:
 
 int strCaseCmp(const char *s1, const char *s2) {
     while (*s1 && *s2) {
@@ -83,27 +82,16 @@ int strCaseCmp(const char *s1, const char *s2) {
     return tolower(*s1) - tolower(*s2);
 }
 
-4. **Input Handling**: For numbers, “scanf()” does the job. For strings, it uses “fgets()” and strips out the newline with “strcspn()” so you don’t get weird input bugs.
+4.  Input Handling : For numbers, “scanf()” does the job. For strings, it uses “fgets()” and strips out the newline with “strcspn()” so you don’t get weird input bugs.
 
-5. **Modular Design**: Every big task is its own function, so the code stays tidy and easy to follow.***
+5. Modular Design : Every big task is its own function, so the code stays tidy and easy to follow.
 
-## Testing and Results
 
 ### Test Cases
 
-| Test ID | Description                | Input                         | Expected Output                     | Status |
-|---------|----------------------------|-------------------------------|-------------------------------------|--------|
-| TC-01   | Valid atomic number search | Choice:1, Atomic#: 6          | Carbon details displayed            | PASS   |
-| TC-02   | Invalid atomic number      | Choice:1, Atomic#: 999        | "No element found..." message       | PASS   |
-| TC-03   | Name search (exact case)   | Choice:2, "Hydrogen"          | Hydrogen details                    | PASS   |
-| TC-04   | Name search (wrong case)   | Choice:2, "hydrogen"          | Hydrogen details (case-insensitive) | PASS   |
-| TC-05   | Symbol search              | Choice:2, "Fe"                | Iron details                       | PASS   |
-| TC-06   | Full table listing         | Choice:3                      | 118 elements listed                 | PASS   |
-| TC-07   | Invalid menu choice        | Choice:5                      | "Invalid choice..." message         | PASS   |
 
-### Sample Console Output
 
-Test Case TC-01 (Carbon Search):
+Test Case -01 (Carbon Search):
 
 Enter atomic number (1-118): 6
 
@@ -116,7 +104,7 @@ Electron Config  : [He] 2s2 2p2
 
 Sample Console Output
 
-Test Case TC-01 (Carbon Search):
+Test Case -01 (Carbon Search):
 Enter atomic number (1-118): 6
 
 ------------------------------
@@ -126,7 +114,7 @@ Atomic Number    : 6
 Electron Config. : [He] 2s2 2p2
 ------------------------------
 
-Test Case TC-04 (Case Insensitive):
+Test Case -02 (Case Insensitive):
 Enter element name or symbol: HYDROGEN
 
 ------------------------------
@@ -136,9 +124,8 @@ Atomic Number    : 1
 Electron Config.: 1s1
 ------------------------------
 
-All tests ran smoothly on the GCC compiler (Ubuntu Linux). No surprises—everything just worked.***
 
-Conclusion and Future Work
+Conclusion 
 
 This project nailed what it set out to do: a working, easy-to-use periodic table app that puts solid C programming skills on display.It covers the basics like structures, arrays, handling strings, breaking things into functions, and interactive input/output. The case-insensitive search helps a lot, and the menu is simple enough that anyone can use it for quick chemistry lookups.What went well:
 - All 118 elements included
@@ -146,27 +133,10 @@ This project nailed what it set out to do: a working, easy-to-use periodic table
 - The console interface looks greate
 - Errors are handled carefully
 
-What’s next?
-- Show more details, like atomic mass, group, period, and state at room temperature
-- Let users load their own element databases from files
-- Add sorting and filtering by group, period, or other properties
-- Build a nicer interface using the ncurses library
-- Add an option to export search results to a text file
 
-***
 
-References
-
-1. K&R C Programming Language (2nd Edition) - Dennis Ritchie, Brian Kernighan
-2. Periodic Table data from IUPAC official specifications
-3. GCC Compiler Documentation - GNU Project
-4. Standard C Library Reference - stdio.h, string.h, ctype.h
-
-***
 
 Appendix - Complete Source Code
-
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -175,23 +145,20 @@ Appendix - Complete Source Code
  * Structure definition for each element of the Periodic Table.
  * Stores atomic number, name, symbol, and electron configuration.
  */
-
 typedef struct
 {
-    int atomicNumber;
-    char name[20];
-    char symbol[3];
-    char electronConfig[50];
+    int Atomic_Number;
+    char Name[20];
+    char Symbol[3];
+    char Electron_Config[50];
 }
-
 Element;
 
 // Array holding details of all 118 elements in the periodic table.
 
     // Populate with tuples: {atomic number, name, symbol, electron configuration}
     
-
-Element periodicTable[118] = 
+Element PeriodicTable[118] =
 {
     {1, "Hydrogen", "H", "1s1"},
     {2, "Helium", "He", "1s2"},
@@ -313,18 +280,16 @@ Element periodicTable[118] =
     {118, "Oganesson", "Og", "[Rn] 5f14 6d10 7s2 7p6"}
 };
 
-
 /* 
  * Prints the details of an element, nicely formatted.
  */
-
-void printElementInfo(Element e) 
+void printElementInfo(Element E) 
 {
     printf("\n------------------------------\n");
-    printf("Element Name     : %s\n", e.name);
-    printf("Symbol           : %s\n", e.symbol);
-    printf("Atomic Number    : %d\n", e.atomicNumber);
-    printf("Electron Config. : %s\n", e.electronConfig);
+    printf("Element Name     : %s\n", E.Name);
+    printf("Symbol           : %s\n", E.Symbol);
+    printf("Atomic Number    : %d\n", E.Atomic_Number);
+    printf("Electron Config. : %s\n", E.Electron_Config);
     printf("------------------------------\n");
 }
 
@@ -332,14 +297,13 @@ void printElementInfo(Element e)
  * Search for an element by its atomic number.
  * Returns 1 if found, 0 if not found.
  */
-
-int searchByAtomicNumber(int number) 
+int searchByAtomicNumber(int number)
 {
-    for (int i = 0; i < 118; i++)
-{
-        if (periodicTable[i].atomicNumber == number) 
-{
-            printElementInfo(periodicTable[i]);
+    for (int i = 0; i < 118; i++) 
+    {
+        if (PeriodicTable[i].Atomic_Number == number) 
+        {
+            printElementInfo(PeriodicTable[i]);
             return 1;
         }
     }
@@ -353,50 +317,43 @@ int searchByAtomicNumber(int number)
  */
 int strCaseCmp(const char *s1, const char *s2) 
 {
-    while (*s1 && *s2) 
-{
+    while (*s1 && *s2)
+        {
         if (tolower(*s1) != tolower(*s2))
             return tolower(*s1) - tolower(*s2);
         s1++;
         s2++;
     }
-
-// Handles difference in string length too
-
-return tolower(*s1) - tolower(*s2);
+    // Handles difference in string length too
+    return tolower(*s1) - tolower(*s2);
 }
 
 /*
  * Search for an element by its name or symbol.
  * Returns 1 if found, 0 if not found.
  */
-
-int searchByNameOrSymbol(char input[]) 
+int searchByNameOrSymbol(char input[])
 {
-    for (int i = 0; i < 118; i++)
-{
-        if (strCaseCmp(input, periodicTable[i].name) == 0 || strCaseCmp(input, periodicTable[i].symbol) == 0)
-{
-            printElementInfo(periodicTable[i]);
+    for (int i = 0; i < 118; i++) {
+        if (strCaseCmp(input, PeriodicTable[i].Name) == 0 || strCaseCmp(input, PeriodicTable[i].Symbol) == 0)
+        {
+            printElementInfo(PeriodicTable[i]);
             return 1;
         }
     }
-
-// In case no matching element is found
-
-return 0;
+    // In case no matching element is found
+    return 0;
 }
 
 /*
  * List all elements in the periodic table.
  * Displays atomic number, symbol, and name.
  */
-
-void listAllElements() {
-    printf("\nList of Elements (Atomic Number : Symbol - Name):\n");
-    for (int i = 0; i < 118; i++)
+void listAllElements()
 {
-        printf("%3d : %3s - %s\n", periodicTable[i].atomicNumber, periodicTable[i].symbol, periodicTable[i].name);
+    printf("\nList of Elements (Atomic Number : Symbol - Name):\n");
+    for (int i = 0; i < 118; i++) {
+        printf("%3d : %3s - %s\n", PeriodicTable[i].Atomic_Number, PeriodicTable[i].Symbol, PeriodicTable[i].Name);
     }
 }
 
@@ -404,17 +361,15 @@ void listAllElements() {
  * Main entry point of the program.
  * Displays menu, takes user input, and calls requested features.
  */
+int main()
 
-
-int main() 
 {
     int choice;
     printf("Welcome to the Modern Periodic Table!\n");
 
     // Main interactive loop
-
-while (1)
-{
+    while (1)
+        {
         printf("\n=============================\n");
         printf("     Modern Periodic Table    \n");
         printf("=============================\n");
@@ -424,53 +379,49 @@ while (1)
         printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-        getchar();                   // Consume leftover newline
+        getchar(); // Consume leftover newline
 
-        if (choice == 1) 
-{
+        if (choice == 1)
+        {
             int num;
             printf("Enter atomic number (1-118): ");
             scanf("%d", &num);
-            getchar();                // Clear input buffer
+            getchar(); // Clear input buffer
 
             // If element not found, inform user
-            
-if (!searchByAtomicNumber(num))
-{
+            if (!searchByAtomicNumber(num)) {
                 printf("No element found with atomic number %d\n", num);
             }
-        } 
-else if (choice == 2) 
-{
+        } else if (choice == 2)
+        {
             char input[50];
             printf("Enter element name or symbol: ");
             fgets(input, sizeof(input), stdin);
-            input[strcspn(input, "\n")] = 0;                           // Remove newline char from input
+            input[strcspn(input, "\n")] = 0; // Remove newline char from input
 
             // Notify if search fails
-
-if (!searchByNameOrSymbol(input))  
-{
+            if (!searchByNameOrSymbol(input)) {
                 printf("No element found with name or symbol '%s'\n", input);
             }
         } 
-else if (choice == 3)
-{
-            listAllElements();                       // Display the full table
-        } 
-else if (choice == 4) 
-{
+        else if (choice == 3)
+        {
+            listAllElements(); // Display the full table
+        }
+        else if (choice == 4)
+        {
             printf("Thank you for using the Modern Periodic Table. Goodbye!\n");
             break;
-        } 
-
-else 
-{
+        }
+        else
+        {
             // Handle invalid choices
             printf("Invalid choice. Please enter 1 to 4.\n");
         }
     }
 
-    return 0;              // Successful program termination
+    return 0;          // Successful program termination
 }
+
+
 
